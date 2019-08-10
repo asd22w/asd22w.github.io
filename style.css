@@ -147,12 +147,12 @@
 
 
 #sliderBox {
-    width: 100%;
     text-align: center;
     border: 1.5px solid #b0bdcf;
     box-sizing: border-box;
     padding: 10px 20px;
     padding-bottom: 60px;
+    width: 100%;
 }
 
 #sliderBox:after, .data:after, .location:after {
