@@ -1,4 +1,4 @@
-! function (t) {
+function sl(t, stepChanger, stepMinCh, btnLocation, euroCrew) {
     var s;
     return s = function () {
         function s(s, e) {
@@ -79,16 +79,60 @@
         }, s.prototype.normalize = function (t, s, e) {
             return (t - s) / (e - s)
         }, s.prototype.addCommas = function (t) {
-            if(this.value == 10800) return 'Unlimited'
-            if(this.value == 9600) return 1024
-            if(this.value == 8400) return 500
-            if(this.value == 7200) return 250
-            if(this.value == 6000) return 100
-            if(this.value == 4800) return 50
-            if(this.value == 3600) return 40
-            if(this.value == 2400) return 30
-            if(this.value == 1200) return 20
-            if(this.value == 0) return 10
+            if(euroCrew) {
+                if(this.value == 8400){
+                    changeData(btnLocation, 40);
+                    return 40
+                }
+                if(this.value == 7200){
+                    changeData(btnLocation, 16);
+                    return 16
+                }
+                if(this.value == 6000){
+                    changeData(btnLocation, 4);
+                    return 4
+                }
+            }
+            if(this.value == 10800) {
+                changeData(btnLocation, 'Unlimited');
+                return 'Unlimited'
+            }
+            if(this.value == 9600){
+                changeData(btnLocation, 1024);
+                return 1024
+            }
+            if(this.value == 8400){
+                changeData(btnLocation, 500);
+                return 500
+            }
+            if(this.value == 7200){
+                changeData(btnLocation, 250);
+                return 250
+            }
+            if(this.value == 6000){
+                changeData(btnLocation, 100);
+                return 100
+            }
+            if(this.value == 4800){
+                changeData(btnLocation, 50);
+                return 50
+            }
+            if(this.value == 3600){
+                changeData(btnLocation, 40);
+                return 40
+            }
+            if(this.value == 2400){
+                changeData(btnLocation, 30);
+                return 30
+            }
+            if(this.value == 1200){
+                changeData(btnLocation, 20);
+                return 20
+            }
+            if(this.value == 0){
+                changeData(btnLocation, 10);
+                return 10
+            }
             return t.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
         }, s.prototype.removeCommas = function (t) {
             return t.toString().replace(/,/g, "")
@@ -96,8 +140,8 @@
     }(), t.fn.bubbleSlider = function (e) {
         var i, h;
         return i = {
-            min: 0,
-            max: 10800,
+            min: stepMinCh,
+            max: stepChanger,
             step: 1200,
             value: 250,
             decimals: 0,
@@ -120,4 +164,362 @@
             return t(this).bubbleSlider()
         })
     })
-}(this.jQuery);
+}
+
+sl(this.jQuery, 10800, 0, 'Europe');
+
+$('.location').click(event => {
+    if($('.dataBtn2').hasClass('button-select-active')) return;
+    if(event.target.tagName != 'BUTTON') return;
+    for(let btn of $('.location button')) {
+        btn.classList.remove('button-select-active');
+    }
+    event.target.classList.add('button-select-active');
+    if(event.target.classList.contains('locationBtn1')) {
+        $('.bubble-slider-wrap').remove();
+        sl(this.jQuery, 10800, 0, 'Europe');
+    }
+    if(event.target.classList.contains('locationBtn2')) {
+        $('.bubble-slider-wrap').remove();
+        sl(this.jQuery, 9600, 0, 'France + Monaco');
+    }
+    if(event.target.classList.contains('locationBtn3')) {
+        $('.bubble-slider-wrap').remove();
+        sl(this.jQuery, 9600, 4800, 'Worldwide');
+    }
+})
+
+$('.data').click(event => {
+    if(event.target.tagName != 'BUTTON') return;
+    for(let btn of $('.data button')) {
+        btn.classList.remove('button-select-active');
+    }
+    event.target.classList.add('button-select-active');
+    if(event.target.classList.contains('dataBtn2')) {
+        $('.bubble-slider-wrap').remove();
+        $('.locationBtn2').addClass('greyed');
+        $('.locationBtn3').addClass('greyed');
+        sl(this.jQuery, 8400, 6000, 'EuropeCrew', true);
+    } else {
+        $('.bubble-slider-wrap').remove();
+        $('.locationBtn2').removeClass('greyed');
+        $('.locationBtn3').removeClass('greyed');
+        sl(this.jQuery, 10800, 0, 'Europe');
+    }
+})
+/* $('.bubble-slider').remove(); */
+
+function changeData (location, gbSelected) {
+    if(location == 'Europe') {
+        switch(gbSelected) {
+            case 10:
+                planName.textContent = 'Starter plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 35';
+                makeDataOnly();
+                makeBtn('eu-10_orange');
+                makeLink();
+                break;
+            case 20:
+                planName.textContent = 'Sailor plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 60';
+                makeDataOnly();
+                makeBtn('eu-20_orange');
+                makeLink();
+                break;
+            case 30:
+                planName.textContent = 'Surfer plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 85';
+                makeDataOnly();
+                makeBtn('eu-30_orange');
+                makeLink();
+                break;
+            case 40:
+                planName.textContent = 'Streamer plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 110';
+                makeDataOnly();
+                makeBtn('eu-40_orange');
+                makeLink();
+                break;
+            case 50:
+                planName.textContent = 'Personal plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 150';
+                makeDataOnly();
+                makeBtn('eu-50_orange');
+                makeLink();
+                break;
+            case 100:
+                planName.textContent = 'Small crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 270';
+                makeDataOnly();
+                makeBtn('eu-100_orange');
+                makeLink();
+                break;
+            case 250:
+                planName.textContent = 'Medium crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 620';
+                makeDataOnly();
+                makeBtn('eu-250_orange');
+                makeLink();
+                break;
+            case 500:
+                planName.textContent = 'Guest and crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 1080';
+                makeDataOnly();
+                makeBtn('eu-500_orange');
+                makeLink();
+                break;
+            case 1024:
+                planName.textContent = 'Big data plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 2000';
+                makeDataOnly();
+                makeBtn('eu-1024_orange');
+                makeLink();
+                break;
+            case 'Unlimited':
+                planName.textContent = 'Unlimited EU plan';
+                period.textContent = '/ Year';
+                money.textContent = '€ 4900';
+                makeDataOnly();
+                makeBtn('eu-unlimited_vodafone-de');
+                makeLink();
+                break;
+        }
+    }
+
+    /* france + monaco btn */
+
+    if(location == 'France + Monaco') {
+        switch(gbSelected) {
+            case 10:
+                planName.textContent = 'Basic plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 30';
+                makeDataOnly();
+                makeBtn('fr-mc-10_orange');
+                makeLink2();
+                break;
+            case 20:
+                planName.textContent = 'Standard plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 39';
+                makeDataOnly();
+                makeBtn('fr-mc-20_orange');
+                makeLink2();
+                break;
+            case 30:
+                planName.textContent = 'Advanced plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 55';
+                makeDataOnly();
+                makeBtn('fr-mc-30_orange')
+                makeLink2();
+                break;
+            case 40:
+                planName.textContent = 'Pro plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 73';
+                makeDataOnly();
+                makeBtn('fr-mc-40_orange')
+                makeLink2();
+                break;
+            case 50:
+                planName.textContent = 'Personal plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 75';
+                makeDataOnly();
+                makeBtn('fr-mc-50_orange')
+                makeLink2();
+                break;
+            case 100:
+                planName.textContent = 'Small crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 135';
+                makeDataOnly();
+                makeBtn('fr-mc-100_orange');
+                makeLink2();
+                break;
+            case 250:
+                planName.textContent = 'Medium crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 310';
+                makeDataOnly();
+                makeBtn('fr-mc-250_orange');
+                makeLink2();
+                break;
+            case 500:
+                planName.textContent = 'Guest and crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 595';
+                makeDataOnly();
+                makeBtn('fr-mc-500_orange');
+                makeLink2();
+                break;
+            case 1024:
+                planName.textContent = 'Big data plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 1080';
+                makeDataOnly();
+                makeBtn('fr-mc-1024_orange');
+                makeLink2();
+                break;
+        }
+    }
+
+    /* worldwide btn */
+
+    if(location == 'Worldwide') {
+        switch(gbSelected) {
+            case 50:
+                planName.textContent = 'Personal plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 262';
+                makeDataOnly();
+                makeBtn('ww-50_vodafone');
+                makeLink3();
+                break;
+            case 100:
+                planName.textContent = 'Small crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 473';
+                makeDataOnly();
+                makeBtn('ww-100_vodafone');
+                makeLink3();
+                break;
+            case 250:
+                planName.textContent = 'Medium crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 787';
+                makeDataOnly();
+                makeBtn('ww-250_vodafone');
+                makeLink3();
+                break;
+            case 500:
+                planName.textContent = 'Guest and crew plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 1575';
+                makeDataOnly();
+                makeBtn('ww-500_vodafone');
+                makeLink3();
+                break;
+            case 1024:
+                planName.textContent = 'Big data plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 2730';
+                makeDataOnly();
+                makeBtn('ww-1024_vodafone');
+                makeLink3();
+                break;
+        }
+    }
+
+    /* Europe crew */
+
+    if(location == 'EuropeCrew') {
+        switch(gbSelected) {
+            case 4:
+                planName.textContent = 'Starter plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 31';
+                makeBtn('crew_eu-4_vodafone');
+                makeLink4();
+                makeLink5();
+                break;
+            case 16:
+                planName.textContent = 'Surfer plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 39';
+                makeBtn('crew_eu-16_vodafone');
+                makeLink4();
+                makeLink5();
+                break;
+            case 40:
+                planName.textContent = 'Streamer plan';
+                period.textContent = '/ Monthly';
+                money.textContent = '£ 49';
+                makeBtn('crew_eu-40_vodafone');
+                makeLink4();
+                makeLink5();
+                break;
+        }
+    }
+}
+
+function makeLink() {
+    let link = document.createElement('a');
+    link.dataset.beaconArticle = "5d399c682c7d3a2ec4bf67fa";
+    link.className = 'text-color-purple-prime text-decoration-underline periodLink';
+    link.textContent = 'Excellent EU coverage';
+    link.href = '#';
+    let repl = document.querySelector('.periodLink');
+    repl.replaceWith(link);
+}
+
+function makeLink2() {
+    let link = document.createElement('a');
+    link.dataset.beaconArticle = "5d399c682c7d3a2ec4bf67fa";
+    link.className = 'text-color-purple-prime text-decoration-underline periodLink';
+    link.textContent = 'France + Monaco';
+    link.href = '#';
+    let repl = document.querySelector('.periodLink');
+    repl.replaceWith(link);
+}
+
+function makeLink3() {
+    let link = document.createElement('a');
+    link.dataset.beaconArticle = "5d399c682c7d3a2ec4bf67fa";
+    link.className = 'text-color-purple-prime text-decoration-underline periodLink';
+    link.textContent = 'Worldwide';
+    link.href = '#';
+    let repl = document.querySelector('.periodLink');
+    repl.replaceWith(link);
+}
+
+function makeLink4() {
+    let link = document.createElement('a');
+    link.dataset.beaconArticle = "5d43e337042863478675c6db";
+    link.className = 'text-color-purple-prime text-decoration-underline periodLink';
+    link.textContent = 'Unlimited calls &amp; text';
+    link.href = '#';
+    let repl = document.querySelector('.periodLink');
+    repl.replaceWith(link);
+}
+
+
+function makeLink5() {
+    let link = document.createElement('a');
+    link.dataset.beaconArticle = "5d43e337042863478675c6db";
+    link.className = 'text-color-purple-prime text-decoration-underline moneyLink';
+    link.textContent = 'Unlimited calls';
+    link.href = '#';
+    let repl = document.querySelector('.moneyLink');
+    repl.replaceWith(link);
+}
+
+function makeBtn(data) {
+    let link = document.createElement('a');
+    link.href = "javascript:void(0)";
+    link.dataset.cbType = 'checkout';
+    link.dataset.cbPlanId = data;
+    link.textContent = 'Sign up';
+    link.className = 'sign-up-button-slider';
+    let repl = document.querySelector('.sign-up-button-slider');
+    repl.replaceWith(link);
+    /* Chargebee.registerAgain(); */
+}
+
+function makeDataOnly() {
+    let p = document.createElement('p');
+    p.textContent = 'Data only';
+    p.className = 'moneyLink';
+    let repl = document.querySelector('.moneyLink');
+    repl.replaceWith(p);
+}

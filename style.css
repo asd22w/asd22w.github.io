@@ -1,3 +1,6 @@
+
+/* line styles */
+
 .bubble-slider {
     display: block;
     width: 100%;
@@ -135,4 +138,174 @@
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%)
+}
+
+/* line styles ends */
+
+
+/* general slider styles */
+
+
+#sliderBox {
+    width: 100%;
+    text-align: center;
+    border: 1.5px solid #b0bdcf;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    padding-bottom: 60px;
+}
+
+#sliderBox:after, .data:after, .location:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* info bars */
+
+.plan, .money, .time {
+    width: 33%;
+    box-sizing: border-box;
+    border: 1.5px solid #b0bdcf;
+    border-top: none;
+    float: left;
+    height: 100px;
+}
+
+.money {
+    border-left: none;
+    border-right: none;
+}
+
+.plan {
+    border-left: none;
+}
+
+.time {
+    border-right: none;
+}
+
+.plan p {
+    width: 50%;
+    float: left;
+}
+
+#planName {
+    width: 100%;
+}
+
+/* buttons */
+
+.location {
+    margin-top: 40px;
+    width: 60%;
+    float: left;
+}
+
+.data {
+    margin-top: 40px;
+    width: 40%;
+    float: left;
+    margin-bottom: 50px;
+}
+
+.data button {
+    color: #fff;
+    background-color: #50b8f2;
+    border: none;
+    padding: 10px 5px;
+    font-size: 20px;
+    width: 40%;
+    float: left;
+    box-sizing: border-box;
+    height: 80px;
+}
+
+.data button:first-child {
+    margin-left: 10%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.data button:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.location button {
+    color: #fff;
+    background-color: #50b8f2;
+    border: none;
+    padding: 10px 5px;
+    height: 80px;
+    font-size: 20px;
+    width: 30%;
+    box-sizing: border-box;
+    float: left;
+}
+
+.location button:focus, .data button:focus {
+    outline: none;
+}
+
+.location button:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.location button:first-child {
+    margin-left: 3%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.sign-up-button-slider {
+    width: 55%;
+    box-sizing: border-box;
+    padding: 15px 20%;
+    background-color: lightgreen;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+.button-select-active {
+    background-color: #5d78f1 !important;
+}
+
+.greyed {
+    background-color: #666 !important;
+}
+
+.bubble-slider-wrap {
+    clear: both;
+}
+
+@media(max-width: 630px) {
+    .plan, .money, .time {
+        width: 100%;
+        border: 1.5px solid #b0bdcf;
+    }
+    .money {
+        border-top: none;
+        border-bottom: none;
+    }
+    .location {
+        width: 100%;
+    }
+    
+    .data {
+        width: 100%;
+    }
+    .location button {
+        font-size: 14px;
+    }
+    .data button {
+        font-size: 12px;
+    }
+    .allowance {
+        font-size: 14px;
+    }
+    #planName {
+        font-size: 14px;
+    }
 }
